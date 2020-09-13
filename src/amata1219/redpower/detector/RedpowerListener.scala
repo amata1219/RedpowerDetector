@@ -14,6 +14,8 @@ object RedpowerListener extends Listener {
     override def hashCode(): Int = ((chunk.getX >> 4) << 16) ^ (chunk.getZ >> 4)
   }
 
-  def on(event: BlockRedstoneEvent): Unit = count(event.getBlock.getChunk) += 1
+  def on(event: BlockRedstoneEvent): Unit = {
+    count(event.getBlock.getChunk) += 1
+  }
 
 }

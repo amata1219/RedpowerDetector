@@ -12,7 +12,10 @@ class RedpowerDetector extends JavaPlugin() {
 
   RedpowerDetector.instance = this
 
-  override def onEnable(): Unit = getServer.getPluginManager.registerEvents(RedpowerListener, this)
+  override def onEnable(): Unit = {
+    getCommand("rpdetect").setExecutor(DetectorControlCommand)
+    getServer.getPluginManager.registerEvents(RedpowerListener, this)
+  }
 
   override def onDisable(): Unit = {
     HandlerList.unregisterAll(this)
@@ -26,8 +29,7 @@ object RedpowerDetector {
   var instance: RedpowerDetector = _
   var DETECTOR_TASK: BukkitTask = _
 
-  def startDetectingRedpower(): Unit = {
-    if (DETECTOR_TASK != null) return
+  def startDetectingRedpower(): Unit = if (!isDetectorTaskRunning) {
     DETECTOR_TASK = new BukkitRunnable() {
       override def run(): Unit = {
         val result: mutable.Map[Chunk, Int] = RedpowerListener.count
@@ -39,10 +41,11 @@ object RedpowerDetector {
     }.runTaskTimer(instance, 1200, 1200)
   }
 
-  def stopDetectionRedpower(): Unit = {
-    if (DETECTOR_TASK == null) return
+  def stopDetectionRedpower(): Unit = if (isDetectorTaskRunning) {
     DETECTOR_TASK.cancel()
     DETECTOR_TASK = null
   }
+
+  def isDetectorTaskRunning: Boolean = DETECTOR_TASK != null
 
 }

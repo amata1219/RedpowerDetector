@@ -17,14 +17,14 @@ object DetectorControlCommand extends CommandExecutor() {
 
     args(0) match {
       case "start" =>
-        if (RedpowerDetector.DETECTOR_TASK != null) {
+        if (RedpowerDetector.isDetectorTaskRunning) {
           sender.sendMessage(s"${ChatColor.RED}既に赤石信号の検知は開始されています！")
           return true
         }
         RedpowerDetector.startDetectingRedpower()
         sender.sendMessage(s"${ChatColor.AQUA}赤石信号の検知を開始しました！")
       case "stop" =>
-        if (RedpowerDetector.DETECTOR_TASK == null) {
+        if (!RedpowerDetector.isDetectorTaskRunning) {
           sender.sendMessage(s"${ChatColor.RED}既に赤石信号の検知は終了されています！")
           return true
         }

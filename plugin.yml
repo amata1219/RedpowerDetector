@@ -3,3 +3,8 @@ main: amata1219.redpower.detector.RedpowerDetector
 version: 1.0.0
 api-version: "1.16"
 author: "@amata1219"
+
+commands:
+  rpdetect:
+    permission: redpower.detector.rpdetect
+    permission-message: "You don't have <permission>"
