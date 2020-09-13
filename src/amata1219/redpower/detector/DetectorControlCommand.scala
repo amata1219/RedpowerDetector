@@ -9,18 +9,27 @@ object DetectorControlCommand extends CommandExecutor() {
     if (args.length == 0) {
       sender.sendMessage(
         s"""
-          |${ChatColor.RED}/rpdetect start: 赤石信号の検知を開始します。
-          |${ChatColor.RED}/rpdetect stop: 赤石信号の検知を終了します。
+          |${ChatColor.AQUA}/rpdetect start: 赤石信号の検知を開始します。
+          |${ChatColor.AQUA}/rpdetect stop: 赤石信号の検知を終了します。
           |""".stripMargin)
       return true
     }
 
-    val plugin: RedpowerDetector = RedpowerDetector.instance
-
     args[0] match {
       case "start" =>
-
-      case _ => println()
+        if (RedpowerDetector.DETECTOR_TASK != null) {
+          sender.sendMessage(s"${ChatColor.RED}既に赤石信号の検知は開始されています！")
+          return true
+        }
+        RedpowerDetector.startDetectingRedpower()
+        sender.sendMessage(s"${ChatColor.AQUA}赤石信号の検知を開始しました！")
+      case "stop" =>
+        if (RedpowerDetector.DETECTOR_TASK == null) {
+          sender.sendMessage(s"${ChatColor.RED}既に赤石信号の検知は終了されています！")
+          return true
+        }
+        RedpowerDetector.stopDetectionRedpower()
+        sender.sendMessage(s"${ChatColor.AQUA}赤石信号の検知を終了しました！")
     }
     true
   }
