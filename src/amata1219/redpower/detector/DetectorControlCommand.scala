@@ -7,11 +7,8 @@ object DetectorControlCommand extends CommandExecutor() {
 
   override def onCommand(sender: CommandSender, cmd: Command, label: String, args: Array[String]): Boolean = {
     if (args.length == 0) {
-      sender.sendMessage(
-        s"""
-          |${ChatColor.AQUA}/rpdetect start: 赤石信号の検知を開始します。
-          |${ChatColor.AQUA}/rpdetect stop: 赤石信号の検知を終了します。
-          |""".stripMargin)
+      sender.sendMessage(s"${ChatColor.AQUA}/rpdetect start: 赤石信号の発生回数の記録を開始します。")
+      sender.sendMessage(s"${ChatColor.AQUA}/rpdetect stop: 赤石信号の発生回数の記録を終了します。")
       return true
     }
 

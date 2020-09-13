@@ -34,7 +34,7 @@ object RedpowerDetector {
       override def run(): Unit = {
         val result: mutable.Map[Chunk, Int] = RedpowerListener.count
         val chunksOverRedpowered: Iterable[Chunk] = result.filter(_._2 > 300).keys
-        if (chunksOverRedpowered.nonEmpty) println("[List of chunks that over redpowered]")
+        if (chunksOverRedpowered.nonEmpty) println("[List of chunks over-redpowered]")
         chunksOverRedpowered.foreach(chunk => println(s"${result(chunk)} @ [${chunk.getX}, ${chunk.getZ}]"))
         result.clear()
       }
