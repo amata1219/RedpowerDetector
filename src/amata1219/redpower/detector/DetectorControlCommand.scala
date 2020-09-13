@@ -15,7 +15,7 @@ object DetectorControlCommand extends CommandExecutor() {
       return true
     }
 
-    args[0] match {
+    args(0) match {
       case "start" =>
         if (RedpowerDetector.DETECTOR_TASK != null) {
           sender.sendMessage(s"${ChatColor.RED}既に赤石信号の検知は開始されています！")

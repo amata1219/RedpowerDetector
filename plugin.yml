@@ -1,5 +1,5 @@
 name: RedpowerDetector
 main: amata1219.redpower.detector.RedpowerDetector
 version: 1.0.0
-api-version: 1.16
-author: @amata1219
+api-version: "1.16"
+author: "@amata1219"
